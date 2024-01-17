@@ -1,0 +1,52 @@
+<template>
+    <lightning-card>
+        <!-- Data Table for Individual Email Results -->
+        <div class="slds-m-around_medium">
+            <!-- Spinner for loading state -->
+            <!-- use new lwc:if|elseif={property} and lwc:else directive instead of outdated if:true -->
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+
+            <template lwc:elseif={hasEmailHistory}>
+                <lightning-datatable
+                        key-field="id"
+                        data={paginatedData}
+                        columns={tableColumns}
+                        hide-checkbox-column
+                        onrowaction={handlePreviewURL}>
+                </lightning-datatable>
+            </template>
+
+            <template lwc:else>
+                <p class="slds-m-around_medium">This Person has no email history.</p>
+            </template>
+        </div>
+    </lightning-card>
+
+    <lightning-card>
+        <template lwc:if={hasEmailHistory}>
+            <!-- Buttons for Pagination -->
+            <div class="slds-m-around_medium">
+                <lightning-button
+                        label="Previous"
+                        onclick={handlePreviousPage}
+                        disabled={isPrevDisabled}>
+                </lightning-button>
+                <lightning-button
+                        label="Next"
+                        onclick={handleNextPage}
+                        disabled={isNextDisabled}>
+                </lightning-button>
+            </div>
+        </template>
+
+    </lightning-card>
+
+    <lightning-card>
+        <!-- Child LWC with modal for displaying Email Results -->
+        <template lwc:if={isModalOpen}>
+            <c-email-preview-modal html-content={htmlContent} is-open={isModalOpen} onclose={handleModalClose}></c-email-preview-modal>
+        </template>
+    </lightning-card>
+</template>
