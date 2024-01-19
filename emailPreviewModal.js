@@ -21,5 +21,18 @@ export default class EmailPreviewModal extends LightningElement {
             // Ensure the content is sanitized and safe
             container.innerHTML = this.htmlContent;
         }
+        //this.disableLinks();
     }
+
+    // Disable links in the preview
+    /*disableLinks() {
+        const previewContent = this.template.querySelector('.email-preview-content');
+        if (previewContent) {
+            const links = previewContent.querySelectorAll('a');
+            links.forEach(link => {
+                link.href = 'javascript:void(0);'; // Disable the link
+                link.style.color = 'grey'; // Optional: Change the color
+            });
+        }
+    }*/
 }

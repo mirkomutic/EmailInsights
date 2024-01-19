@@ -1,9 +1,23 @@
 import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { getObjectInfo } from 'lightning/uiObjectInfoApi';
+import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 
 //Apex Methods
 import getEmailHistory from '@salesforce/apex/MarketingCloudController.getEmailHistory';
 import getPreviewEmail from '@salesforce/apex/MarketingCloudController.getPreviewEmail';
+
+//Custom Labels
+import SFMC_EmailInsights_EmailName from '@salesforce/label/c.SFMC_EmailInsights_EmailName';
+import SFMC_EmailInsights_EmailSubject from '@salesforce/label/c.SFMC_EmailInsights_EmailSubject';
+import SFMC_EmailInsights_DateSent from '@salesforce/label/c.SFMC_EmailInsights_DateSent';
+import SFMC_EmailInsights_DateOpened from '@salesforce/label/c.SFMC_EmailInsights_DateOpened';
+import SFMC_EmailInsights_HardBounce from '@salesforce/label/c.SFMC_EmailInsights_HardBounce';
+import SFMC_EmailInsights_SoftBounce from '@salesforce/label/c.SFMC_EmailInsights_SoftBounce';
+import SFMC_EmailInsights_TotalClicks from '@salesforce/label/c.SFMC_EmailInsights_TotalClicks';
+import SFMC_EmailInsights_DateUnsubscribed from '@salesforce/label/c.SFMC_EmailInsights_DateUnsubscribed';
+import SFMC_EmailInsights_PreviewURL from '@salesforce/label/c.SFMC_EmailInsights_PreviewURL';
+
 
 export default class MarketingInsights extends LightningElement {
     @api recordId;
@@ -24,19 +38,19 @@ export default class MarketingInsights extends LightningElement {
 
     //Email History Table
     tableColumns = [
-        { label: 'Email Name', fieldName: 'emailName' },
-        { label: 'Email Subject', fieldName: 'emailSubject' },
-        { label: 'Date Sent', fieldName: 'dateSent', type: 'date' },
-        { label: 'Date Opened', fieldName: 'dateOpened', type: 'date' },
-        { label: 'Hard Bounce', fieldName: 'hardBounce', type: 'boolean' },
-        { label: 'Soft Bounce', fieldName: 'softBounce', type: 'boolean' },
-        { label: 'Total Clicks', fieldName: 'totalClicks', type: 'number' },
-        { label: 'Date Unsubscribed', fieldName: 'dateUnsubscribed', type: 'date' },
+        { label: SFMC_EmailInsights_EmailName, fieldName: 'emailName' },
+        { label: SFMC_EmailInsights_EmailSubject, fieldName: 'emailSubject' },
+        { label: SFMC_EmailInsights_DateSent, fieldName: 'dateSent', type: 'date' },
+        { label: SFMC_EmailInsights_DateOpened, fieldName: 'dateOpened', type: 'date' },
+        { label: SFMC_EmailInsights_HardBounce, fieldName: 'hardBounce', type: 'boolean' },
+        { label: SFMC_EmailInsights_SoftBounce, fieldName: 'softBounce', type: 'boolean' },
+        { label: SFMC_EmailInsights_TotalClicks, fieldName: 'totalClicks', type: 'number' },
+        { label: SFMC_EmailInsights_DateUnsubscribed, fieldName: 'dateUnsubscribed', type: 'date' },
         {
-            label: 'Preview URL',
+            label: SFMC_EmailInsights_PreviewURL,
             type: 'button',
             typeAttributes: {
-                label: 'Click to see Preview',
+                label: 'Preview',
                 name: 'preview_url',
                 variant: 'base'
             }

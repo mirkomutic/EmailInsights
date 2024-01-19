@@ -1,3 +1,7 @@
 /**
  * Created by mirko on 16.01.2024.
  */
+.email-preview-content a {
+    pointer-events: none;
+    color: grey; /* Optional: Change the color to indicate that it is disabled */
+}

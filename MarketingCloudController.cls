@@ -8,13 +8,10 @@ public with sharing class MarketingCloudController {
 
     @AuraEnabled(cacheable=true)
     public static List<EmailHistory> getEmailHistory(String contactOrLeadId) {
-        //contactOrLeadId = '0030700000rTrbrAAC'; //with preview emails
-        //contactOrLeadId = '003070000026ZUHAA2'; //with more than one page
-
         //Use existing class SFMC_ConnectionSet to get the token
         //Create payload
         //Create request using existing helper methods
-        String token = SFMC_ConnectionSet.getAuthToken(!isSandboxOrTest);
+        String token = SFMC_ConnectionSet.getAuthToken(true);
         String payload =
                         'token=' + EncodingUtil.urlEncode(token, 'UTF-8') +
                         '&operation=requestDataInternal' +
